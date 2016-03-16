@@ -39,6 +39,7 @@
     "eslint-loader": "^1.2.1",
     "eslint-plugin-react": "^3.16.1",
     "fs": "0.0.2",
+    "immutable": "^3.7.6",
     "inherits": "^2.0.1",
     "istanbul": "^0.3.21",
     "istanbul-instrumenter-loader": "^0.2.0",
@@ -65,6 +66,7 @@
     "react": "^0.14.3",
     "react-addons-test-utils": "^0.14.6",
     "react-dom": "^0.14.3",
+    "redux": "^3.3.1",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
     "string.prototype.startswith": "^0.2.0",
@@ -72,6 +74,7 @@
     "vega-lite": "^1.0.1",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.10.0",
     "yargs": "^4.2.0"
   },
   "scripts": {
@@ -94,6 +97,7 @@
     "start": "webpack-dev-server --devtool=cheap-module-source-map --inline"
   },
   "dependencies": {
-    "jsdoc": "^3.4.0"
+    "jsdoc": "^3.4.0",
+    "react-redux": "^4.4.1"
   }
 }
