@@ -66,6 +66,7 @@
     "react": "^0.14.3",
     "react-addons-test-utils": "^0.14.6",
     "react-dom": "^0.14.3",
+    "react-redux": "^4.4.1",
     "redux": "^3.3.1",
     "sinon": "^1.17.2",
     "sinon-chai": "^2.8.0",
@@ -96,7 +97,6 @@
     "start": "webpack-dev-server --devtool=cheap-module-source-map --inline"
   },
   "dependencies": {
-    "jsdoc": "^3.4.0",
-    "react-redux": "^4.4.1"
+    "jsdoc": "^3.4.0"
   }
 }
