@@ -15,14 +15,11 @@ function todos(state, action) {
   }
   switch (action.type) {
     case types.ADD_TODO:
-      return [
-        {
-          id: state.reduce(function (maxId, todo) { Math.max(todo.id, maxId), -1}) + 1,
-          completed: false,
-          text: action.text
-        },
-        ...state
-      ]
+      return [{
+        id: state.reduce(function (maxId, todo) { Math.max(todo.id, maxId), -1}) + 1,
+        completed: false,
+        text: action.text
+      }].concat( state )
 
     case types.DELETE_TODO:
       return state.filter(function(todo) {
