@@ -10,7 +10,9 @@ var dl = require('datalib'),
     propSg = require('../../../util/prop-signal'),
     model = require('../../'),
     lookup = model.lookup,
-    count = {group: -1};
+    count = {group: -1},
+    store = require('../../../store'),
+    markProps = require('../../../actions/markProperties');
 
 /**
  * @classdesc A Lyra Mark Primitive.
@@ -73,9 +75,45 @@ Mark.prototype.init = function() {
   }
 
   this.initHandles();
-
+  this.setProperties();
+  this.getProperties();
   return this;
 };
+
+
+/*
+  Set properties onto the store
+*/
+
+Mark.prototype.setProperties = function(){
+  store.dispatch(markProps.addMark(this.name, this.properties));
+}
+
+
+/*
+  get properties from the store
+*/
+
+Mark.prototype.getProperties = function(){
+  var state = store.getState(),
+      props = state.get('markProperties').get(this.name);
+  return props;
+}
+
+/*
+  update properties
+ */
+Mark.prototype.updateProperties = function(props){
+  store.dispatch(markProps.updateProps(this.name, props));
+}
+
+/*
+  delete this
+ */
+Mark.prototype.deleteFromStore = function(){
+  store.dispatch(markProps.removeMark(this.name));
+}
+
 
 /**
  * Get/set a mark's backing dataset.
