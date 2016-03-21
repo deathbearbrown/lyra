@@ -75,8 +75,10 @@ Mark.prototype.init = function() {
   }
 
   this.initHandles();
-  this.setProperties();
-  this.getProperties();
+
+  // set properties in the store
+ // this.setProperties();
+
   return this;
 };
 
@@ -87,7 +89,7 @@ Mark.prototype.init = function() {
 
 Mark.prototype.setProperties = function(){
   store.dispatch(markProps.addMark(this.name, this.properties));
-}
+};
 
 
 /*
@@ -98,21 +100,21 @@ Mark.prototype.getProperties = function(){
   var state = store.getState(),
       props = state.get('markProperties').get(this.name);
   return props;
-}
+};
 
 /*
   update properties
  */
 Mark.prototype.updateProperties = function(props){
   store.dispatch(markProps.updateProps(this.name, props));
-}
+};
 
 /*
   delete this
  */
 Mark.prototype.deleteFromStore = function(){
   store.dispatch(markProps.removeMark(this.name));
-}
+};
 
 
 /**

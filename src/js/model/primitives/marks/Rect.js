@@ -24,6 +24,7 @@ function Rect() {
       update = props.update;
 
   dl.extend(update, {
+    fill: {value: '#55498D'},
     x2: {value: 60},
     y2: {value: 60},
     xc: {value: 60, _disabled: true},
