@@ -1,13 +1,20 @@
 'use strict';
 var React = require('react'),
+    connect = require('react-redux').connect,
     Property = require('./Property'),
     ExtentProperty = require('./ExtentProperty');
+
+function mapStateToProps(reduxState, ownProps) {
+  return {
+    update: reduxState.get('markProperties').get(ownProps.primitive.name)
+  };
+}
 
 var Rect = React.createClass({
   render: function() {
     var props = this.props,
         primitive = props.primitive,
-        update = primitive.properties.update;
+        update = props.update.toJS();
 
     return (
       <div>
@@ -47,4 +54,4 @@ var Rect = React.createClass({
   }
 });
 
-module.exports = Rect;
+module.exports = connect(mapStateToProps)(Rect);

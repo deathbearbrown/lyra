@@ -21,7 +21,7 @@ var g = model.Scene.child('marks.group'),
     p3 = model.pipeline('gapminder');
 
 // Pre-populate state with one rect, one symbol, one text & one line mark
-g3.child('marks.rect');
+g.child('marks.rect');
 // g.child('marks.symbol');
 // g2.child('marks.line');
 // g.child('marks.text');

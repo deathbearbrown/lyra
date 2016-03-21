@@ -21,8 +21,7 @@ var DELTA = sg.DELTA,
 function Line() {
   Mark.call(this, 'line');
 
-  var props = this.properties,
-      update = props.update,
+  var update = this.config.update,
       defaults = {
         stroke: {value: '#000000'},
         strokeWidth: {value: 3}

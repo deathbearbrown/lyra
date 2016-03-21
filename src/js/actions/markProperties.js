@@ -29,9 +29,3 @@ module.exports.updateProps = function(name, props) {
   };
 };
 
-module.exports.getProps = function(name) {
-  return {
-    type: 'GET_MARK',
-    name: name
-  };
-};

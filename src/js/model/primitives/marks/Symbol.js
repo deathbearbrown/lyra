@@ -20,13 +20,13 @@ var DELTA = sg.DELTA,
 function Symbol() {
   Mark.call(this, 'symbol');
 
-  var props = this.properties,
-      update = props.update;
+  var update = this.config.update,
+      defaults = {
+        size: {value: 100},
+        shape: {value: 'circle'}
+      };
 
-  dl.extend(update, {
-    size: {value: 100},
-    shape: {value: 'circle'}
-  });
+  dl.extend(update, defaults);
 
   return this;
 }

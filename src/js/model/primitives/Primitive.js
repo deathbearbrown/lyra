@@ -24,7 +24,8 @@ function Primitive() {
 }
 
 function _clean(spec, clean) {
-  var k, p, c, cln = clean !== false;
+  var k, p, c;
+  var cln = clean !== false;
   for (k in spec) {
     p = spec[k];
     c = k.startsWith('_');

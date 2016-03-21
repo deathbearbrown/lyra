@@ -36,7 +36,7 @@ function Mark(type) {
   this.type = type;
   this.from = undefined;
 
-  this.properties = {
+  this.config = {
     update: {
       x: {value: 25},
       y: {value: 25},
@@ -62,23 +62,30 @@ inherits(Mark, Primitive);
  * @returns {Object} The Mark.
  */
 Mark.prototype.init = function() {
-  var props = this.properties,
-      update = props.update,
-      k, p;
+  var props = this.config,
+      update = props.update;
 
-  for (k in update) {
-    p = update[k];
-    if (p.value !== undefined) {
-      update[k] = dl.extend(sg.init(propSg(this, k), p.value),
-        p._disabled ? {_disabled: true} : {});
+  //add signals for values unset
+  for (var key in update) {
+    var property = update[key];
+    if (property.value !== undefined) {
+      // create signal object
+      var signal = sg.init(propSg(this, key), property.value);
+      var disabledProps = property._disabled ? { _disabled: true } : {};
+      // update property value to have signal key and
+      // add disabled property if it doesn't exist.
+      update[key] = dl.extend(signal, disabledProps);
     }
   }
 
   this.initHandles();
 
   // set properties in the store
- // this.setProperties();
+  // remove propery object from primative
+  this.setProps();
 
+  var foo = this.getProps();
+  console.log(JSON.stringify(foo));
   return this;
 };
 
@@ -87,8 +94,10 @@ Mark.prototype.init = function() {
   Set properties onto the store
 */
 
-Mark.prototype.setProperties = function(){
-  store.dispatch(markProps.addMark(this.name, this.properties));
+Mark.prototype.setProps = function(){
+  // temporary set on the dumb this.properties field
+  this.properties = this.config;
+  store.dispatch(markProps.addMark(this.name, this.config.update));
 };
 
 
@@ -96,17 +105,29 @@ Mark.prototype.setProperties = function(){
   get properties from the store
 */
 
-Mark.prototype.getProperties = function(){
+Mark.prototype.getProps = function(){
   var state = store.getState(),
       props = state.get('markProperties').get(this.name);
   return props;
 };
 
 /*
+  export properties from the store
+*/
+
+Mark.prototype.exportProps = function(){
+  var props = this.getProps();
+  //clean them
+  return props;
+};
+
+/*
   update properties
  */
-Mark.prototype.updateProperties = function(props){
+Mark.prototype.updateProps = function(props){
   store.dispatch(markProps.updateProps(this.name, props));
+  // temporary reset on the dumb this.properties field
+  this.properties = this.getProps();
 };
 
 /*
@@ -115,6 +136,7 @@ Mark.prototype.updateProperties = function(props){
 Mark.prototype.deleteFromStore = function(){
   store.dispatch(markProps.removeMark(this.name));
 };
+
 
 
 /**

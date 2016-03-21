@@ -20,18 +20,19 @@ var DELTA = sg.DELTA,
 function Rect() {
   Mark.call(this, 'rect');
 
-  var props = this.properties,
-      update = props.update;
+  var update = this.config.update,
+      defaults = {
+        fill: {value: '#55498D'},
+        x2: {value: 60},
+        y2: {value: 60},
+        xc: {value: 60, _disabled: true},
+        yc: {value: 60, _disabled: true},
+        width: {value: 30, _disabled: true},
+        height: {value: 30, _disabled: true}
+      };
 
-  dl.extend(update, {
-    fill: {value: '#55498D'},
-    x2: {value: 60},
-    y2: {value: 60},
-    xc: {value: 60, _disabled: true},
-    yc: {value: 60, _disabled: true},
-    width: {value: 30, _disabled: true},
-    height: {value: 30, _disabled: true}
-  });
+
+  dl.extend(update, defaults);
 
   return this;
 }

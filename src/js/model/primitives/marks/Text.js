@@ -20,23 +20,25 @@ var DELTA = sg.DELTA,
  */
 function Text() {
   Mark.call(this, 'text');
+  var update = this.config.update,
+      defaults =  {
+        strokeWidth: {value: 0},
+        x: {value: 80},
+        y: {value: 30},
+        dx: {value: 0, offset: 0},
+        dy: {value: 0, offset: 0},
+        // Text-specific properties
+        text: {value: 'Text'},
+        align: {value: 'center'},
+        baseline: {value: 'middle'},
+        font: {value: 'Helvetica'},
+        fontSize: {value: 14},
+        fontStyle: {value: 'normal'},
+        fontWeight: {value: 'normal'},
+        angle: {value: 0}
+      };
 
-  dl.extend(this.properties.update, {
-    strokeWidth: {value: 0},
-    x: {value: 80},
-    y: {value: 30},
-    dx: {value: 0, offset: 0},
-    dy: {value: 0, offset: 0},
-    // Text-specific properties
-    text: {value: 'Text'},
-    align: {value: 'center'},
-    baseline: {value: 'middle'},
-    font: {value: 'Helvetica'},
-    fontSize: {value: 14},
-    fontStyle: {value: 'normal'},
-    fontWeight: {value: 'normal'},
-    angle: {value: 0}
-  });
+  dl.extend(update, defaults);
 
   return this;
 }
