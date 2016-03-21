@@ -14,6 +14,25 @@ var dl = require('datalib'),
     store = require('../../../store'),
     markProps = require('../../../actions/markProperties');
 
+function _clean(spec, clean) {
+  var k, p, c;
+  var cln = clean !== false;
+  for (k in spec) {
+    p = spec[k];
+    c = k.startsWith('_');
+    c = c || p._disabled || p === undefined;
+    if (c) {
+      delete spec[k];
+    } else if (dl.isObject(p)) {
+      spec[k] = p.signal && cln ? sg.value(p.signal) : _clean(spec[k], clean);
+    }
+  }
+
+  return spec;
+}
+
+
+
 /**
  * @classdesc A Lyra Mark Primitive.
  *
@@ -96,7 +115,6 @@ Mark.prototype.init = function() {
 
 Mark.prototype.setProps = function(){
   // temporary set on the dumb this.properties field
-  this.properties = this.config;
   store.dispatch(markProps.addMark(this.name, this.config.update));
 };
 
@@ -116,7 +134,7 @@ Mark.prototype.getProps = function(){
 */
 
 Mark.prototype.exportProps = function(){
-  var props = this.getProps();
+  var props = this.getProps().toJS();
   //clean them
   return props;
 };
@@ -126,8 +144,6 @@ Mark.prototype.exportProps = function(){
  */
 Mark.prototype.updateProps = function(props){
   store.dispatch(markProps.updateProps(this.name, props));
-  // temporary reset on the dumb this.properties field
-  this.properties = this.getProps();
 };
 
 /*
@@ -174,10 +190,14 @@ Mark.prototype.dataset = function(id) {
 Mark.prototype.initHandles = function() {};
 
 Mark.prototype.export = function(clean) {
+  // stick properties back onto the thing
+  this.properties = {
+    update: this.exportProps()
+  };
+
   var spec = Primitive.prototype.export.call(this, clean),
-      props = spec.properties,
-      update = props.update,
       from = this.from && lookup(this.from),
+      update = spec.properties.update,
       keys = dl.keys(update),
       k, v, i, len, s, f;
 
