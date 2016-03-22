@@ -116,6 +116,7 @@ Mark.prototype.init = function() {
 Mark.prototype.setProps = function(){
   // temporary set on the dumb this.properties field
   store.dispatch(markProps.addMark(this.name, this.config.update));
+  this.properties = this.config;
 };
 
 
@@ -190,10 +191,10 @@ Mark.prototype.dataset = function(id) {
 Mark.prototype.initHandles = function() {};
 
 Mark.prototype.export = function(clean) {
-  // stick properties back onto the thing
-  this.properties = {
-    update: this.exportProps()
-  };
+  // // stick properties back onto the thing
+  // this.properties = {
+  //   update: this.exportProps()
+  // };
 
   var spec = Primitive.prototype.export.call(this, clean),
       from = this.from && lookup(this.from),

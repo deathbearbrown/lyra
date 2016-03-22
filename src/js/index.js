@@ -14,8 +14,8 @@ model.init();
 var ui = require('./components');
 
 var g = model.Scene.child('marks.group'),
-    g2 = g.child('marks.group'),
-    g3 = g2.child('marks.group'),
+    // g2 = g.child('marks.group'),
+    // g3 = g2.child('marks.group'),
     p = model.pipeline('cars'),
     p2 = model.pipeline('jobs'),
     p3 = model.pipeline('gapminder');
