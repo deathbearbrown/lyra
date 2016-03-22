@@ -21,7 +21,11 @@ function markPropertiesReducer(state, action) {
   if (action.type === 'UPDATE_MARK') {
     // properties = action.props
     // name = action.name
-    return state.update(action.name, action.props);
+    var newState = state;
+    for (var key in action.props){
+      newState.setIn([action.name, key, 'value'], action.props[key]);
+    }
+    return newState;
   }
   return state;
 }

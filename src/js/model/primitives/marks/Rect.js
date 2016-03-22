@@ -20,7 +20,7 @@ var DELTA = sg.DELTA,
 function Rect() {
   Mark.call(this, 'rect');
 
-  var update = this.config.update,
+  var update = this.properties.update,
       defaults = {
         fill: {value: '#55498D'},
         x2: {value: 60},
@@ -30,7 +30,6 @@ function Rect() {
         width: {value: 30, _disabled: true},
         height: {value: 30, _disabled: true}
       };
-
 
   dl.extend(update, defaults);
 
@@ -50,39 +49,39 @@ Rect.prototype.initHandles = function() {
       w = propSg(this, 'width'),
       h = propSg(this, 'height');
 
-  sg.streams(x, [{
-    type: DELTA, expr: test(at() + '||' + at('left'), x + '+' + DX, x)
-  }]);
+  // sg.streams(x, [{
+  //   type: DELTA, expr: test(at() + '||' + at('left'), x + '+' + DX, x)
+  // }]);
 
-  sg.streams(xc, [{
-    type: DELTA, expr: test(at() + '||' + at('left'), xc + '+' + DX, xc)
-  }]);
+  // sg.streams(xc, [{
+  //   type: DELTA, expr: test(at() + '||' + at('left'), xc + '+' + DX, xc)
+  // }]);
 
-  sg.streams(x2, [{
-    type: DELTA, expr: test(at() + '||' + at('right'), x2 + '+' + DX, x2)
-  }]);
+  // sg.streams(x2, [{
+  //   type: DELTA, expr: test(at() + '||' + at('right'), x2 + '+' + DX, x2)
+  // }]);
 
-  sg.streams(y, [{
-    type: DELTA, expr: test(at() + '||' + at('top'), y + '+' + DY, y)
-  }]);
+  // sg.streams(y, [{
+  //   type: DELTA, expr: test(at() + '||' + at('top'), y + '+' + DY, y)
+  // }]);
 
-  sg.streams(yc, [{
-    type: DELTA, expr: test(at() + '||' + at('top'), yc + '+' + DY, yc)
-  }]);
+  // sg.streams(yc, [{
+  //   type: DELTA, expr: test(at() + '||' + at('top'), yc + '+' + DY, yc)
+  // }]);
 
-  sg.streams(y2, [{
-    type: DELTA, expr: test(at() + '||' + at('bottom'), y2 + '+' + DY, y2)
-  }]);
+  // sg.streams(y2, [{
+  //   type: DELTA, expr: test(at() + '||' + at('bottom'), y2 + '+' + DY, y2)
+  // }]);
 
-  sg.streams(w, [
-    {type: DELTA, expr: test(at('left'), w + '-' + DX, w)},
-    {type: DELTA, expr: test(at('right'), w + '+' + DX, w)}
-  ]);
+  // sg.streams(w, [
+  //   {type: DELTA, expr: test(at('left'), w + '-' + DX, w)},
+  //   {type: DELTA, expr: test(at('right'), w + '+' + DX, w)}
+  // ]);
 
-  sg.streams(h, [
-    {type: DELTA, expr: test(at('top'), h + '-' + DY, h)},
-    {type: DELTA, expr: test(at('bottom'), h + '+' + DY, h)}
-  ]);
+  // sg.streams(h, [
+  //   {type: DELTA, expr: test(at('top'), h + '-' + DY, h)},
+  //   {type: DELTA, expr: test(at('bottom'), h + '+' + DY, h)}
+  // ]);
 };
 
 module.exports = Rect;

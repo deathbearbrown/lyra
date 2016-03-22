@@ -27,7 +27,7 @@ function Group() {
   this.marks = [];
 
   // By default, make groups full width/height.
-  this.config.update = {
+  this.properties.update = {
     x: {value: 0},
     y: {value: 0},
     width: {signal: ns('vis_width')},

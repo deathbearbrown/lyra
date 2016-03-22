@@ -14,25 +14,6 @@ var dl = require('datalib'),
     store = require('../../../store'),
     markProps = require('../../../actions/markProperties');
 
-function _clean(spec, clean) {
-  var k, p, c;
-  var cln = clean !== false;
-  for (k in spec) {
-    p = spec[k];
-    c = k.startsWith('_');
-    c = c || p._disabled || p === undefined;
-    if (c) {
-      delete spec[k];
-    } else if (dl.isObject(p)) {
-      spec[k] = p.signal && cln ? sg.value(p.signal) : _clean(spec[k], clean);
-    }
-  }
-
-  return spec;
-}
-
-
-
 /**
  * @classdesc A Lyra Mark Primitive.
  *
@@ -55,7 +36,7 @@ function Mark(type) {
   this.type = type;
   this.from = undefined;
 
-  this.config = {
+  this.properties = {
     update: {
       x: {value: 25},
       y: {value: 25},
@@ -81,8 +62,11 @@ inherits(Mark, Primitive);
  * @returns {Object} The Mark.
  */
 Mark.prototype.init = function() {
-  var props = this.config,
+  var props = this.properties,
       update = props.update;
+
+  //set property in store.
+  this.setProps();
 
   //add signals for values unset
   for (var key in update) {
@@ -99,12 +83,6 @@ Mark.prototype.init = function() {
 
   this.initHandles();
 
-  // set properties in the store
-  // remove propery object from primative
-  this.setProps();
-
-  var foo = this.getProps();
-  console.log(JSON.stringify(foo));
   return this;
 };
 
@@ -115,8 +93,7 @@ Mark.prototype.init = function() {
 
 Mark.prototype.setProps = function(){
   // temporary set on the dumb this.properties field
-  store.dispatch(markProps.addMark(this.name, this.config.update));
-  this.properties = this.config;
+  store.dispatch(markProps.addMark(this.name, this.properties.update));
 };
 
 
@@ -191,10 +168,6 @@ Mark.prototype.dataset = function(id) {
 Mark.prototype.initHandles = function() {};
 
 Mark.prototype.export = function(clean) {
-  // // stick properties back onto the thing
-  // this.properties = {
-  //   update: this.exportProps()
-  // };
 
   var spec = Primitive.prototype.export.call(this, clean),
       from = this.from && lookup(this.from),

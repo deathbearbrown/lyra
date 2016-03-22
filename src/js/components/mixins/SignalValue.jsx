@@ -51,6 +51,12 @@ module.exports = {
     this.setState({value: value});
   },
 
+  setStoreValue: function (Prim, prop, value){
+    var data = {};
+    data[prop] = value;
+    Prim.updateProps(data);
+  },
+
   handleChange: function(evt) {
     this.setValue(evt.target.value);
   },
@@ -61,6 +67,9 @@ module.exports = {
         type = props.type;
 
     value = (type === 'number' || type === 'range') ? +value : value;
+
+    // set value on store
+    this.setStoreValue(props.primitive, props.name, value);
 
     if (signal) {
       model.signal(signal, value).update();

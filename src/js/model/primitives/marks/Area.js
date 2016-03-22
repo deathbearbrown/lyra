@@ -21,7 +21,7 @@ var DELTA = sg.DELTA,
 function Area() {
   Mark.call(this, 'area');
 
-  var update = this.config.update,
+  var update = this.properties.update,
       defaults = {
         x2: {value: 0},
         y2: {value: 0},

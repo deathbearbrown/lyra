@@ -20,7 +20,7 @@ var DELTA = sg.DELTA,
  */
 function Text() {
   Mark.call(this, 'text');
-  var update = this.config.update,
+  var update = this.properties.update,
       defaults =  {
         strokeWidth: {value: 0},
         x: {value: 80},

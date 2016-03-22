@@ -25,7 +25,7 @@ module.exports.updateProps = function(name, props) {
   return {
     type: 'UPDATE_MARK',
     name: name,
-    props: properties
+    props: props
   };
 };
 

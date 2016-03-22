@@ -14,7 +14,7 @@ var Rect = React.createClass({
   render: function() {
     var props = this.props,
         primitive = props.primitive,
-        update = props.update.toJS();
+        update = primitive.properties.update;
 
     return (
       <div>

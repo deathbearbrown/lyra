@@ -20,7 +20,7 @@ var DELTA = sg.DELTA,
 function Symbol() {
   Mark.call(this, 'symbol');
 
-  var update = this.config.update,
+  var update = this.properties.update,
       defaults = {
         size: {value: 100},
         shape: {value: 'circle'}
