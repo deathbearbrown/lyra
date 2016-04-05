@@ -168,14 +168,14 @@ var DataTable = React.createClass({
         <div className="datatable"
           onMouseLeave={this.hideFull} onScroll={this.hideFull}>
           <table><tbody>
-            {keys.map(function(k) {
+            {keys.map(function(k,i) {
               return (
-                <tr key={k}>
+                <tr key={i}>
                   <td className={'field ' + props.className}
                     onMouseOver={this.showFullField}>{k}</td>
                   {values.map(function(v, i) {
                     return (
-                      <td key={v._id} className={i % 2 ? 'even' : 'odd'}
+                      <td key={i} className={i % 2 ? 'even' : 'odd'}
                         onMouseOver={this.showFullValue}>{v[k]}</td>
                     );
                   }, this)}
