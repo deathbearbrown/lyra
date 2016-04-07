@@ -55,3 +55,4 @@ Promise.all([
 // Expose model, store and Sidebars globally (via `window`) for debugging
 global.model = model;
 global.store = store;
+global.walkthrough = require('./walkthroughs');

@@ -5,7 +5,7 @@ var React = require('react'),
     VisualSidebar = require('./VisualSidebar'),
     PipelinesSidebar = require('./PipelinesSidebar'),
     Toolbar = require('./Toolbar'),
-    Hints = require('./Hints'),
+    Walkthrough = require('./walkthrough/WalkthroughMenu');
     model = require('../model');
 
 // Splitting each sidebar into its column
@@ -20,7 +20,7 @@ var Sidebars = React.createClass({
           pipelines={pipelines} />
         <PipelinesSidebar />
         <Toolbar/>
-        <Hints/>
+        <Walkthrough/>
         <ReactTooltip effect="solid"/>
       </div>
     );
