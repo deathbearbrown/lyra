@@ -19,17 +19,19 @@ function mapStateToProps(reduxState) {
     // Vega "validity" is a good proxy for "has something been added or removed
     // that we need to re-render globally to account for"
     arbitraryPropToTriggerUpdate: getIn(reduxState, 'vega.invalid'),
-    showWalkthrough: show
+    showWalkthrough: show,
+    pipelines: getIn(reduxState, 'pipelines.status')
   };
 }
 
 var Sidebars = React.createClass({
   propTypes: {
     arbitraryPropToTriggerUpdate: React.PropTypes.bool,
-    showWalkthrough: React.PropTypes.string
+    showWalkthrough: React.PropTypes.string,
+    pipelines: React.PropTypes.bool
   },
   render: function() {
-    var pipelines = model.pipeline();
+    var pipelines = this.props.pipelines ? model.pipeline() : [];
     var showWalkthrough = this.props.showWalkthrough ? <WalkthroughStep/> : '';
     return (
       <div>
